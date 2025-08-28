@@ -4,15 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #sops-nix = {
+      #url = "github:Mic92/sops-nix";
+      #inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #home-manager = {
+      #url = "github:nix-community/home-manager";
+      #inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs = { self, nixpkgs, ... }: 
@@ -30,7 +30,7 @@
       };
       modules = [
         ./configuration.nix
-        sops-nix.nixosModules.sops
+        #sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
       ];
     };
