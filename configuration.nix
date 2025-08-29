@@ -141,7 +141,6 @@
       User = "hms";
       Group = "hms";
       Restart = "always"; # Automatically restart if it crashes
-      };
     };
   };
 
