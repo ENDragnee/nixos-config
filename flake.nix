@@ -31,7 +31,7 @@
       modules = [
         ./configuration.nix
         #sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
+        #home-manager.nixosModules.home-manager
       ];
     };
   };
