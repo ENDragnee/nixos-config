@@ -15,4 +15,5 @@
         sops-nix.nixosModules.sops
       ];
     };
+  };
 }
