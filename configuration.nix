@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, hms-app-pkg, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -122,27 +122,27 @@
         };
       };
   };
-  systemd.services.hms-app = {
-    # This service will start after the network and database are ready
-    after = [ "network-online.target" "postgresql.service" ];
-    wants = [ "network-online.target" "postgresql.service" ];
-
-    # The command to start your app
-    # (Assumes you've built your Next.js app with Nix)
-    script = ''
-      # Set database credentials and other secrets here
-      export DATABASE_URL="postgres://hms_user:password@localhost/hms_db"
-      # Run the production server from the Nix build output of your app
-      exec ${hms-app-pkg}/bin/start-server
-    '';
-
-    # Run the service as a dedicated, unprivileged user for security
-    serviceConfig = {
-      User = "hms";
-      Group = "hms";
-      Restart = "always"; # Automatically restart if it crashes
-    };
-  };
+  # systemd.services.hms-app = {
+  #   # This service will start after the network and database are ready
+  #   after = [ "network-online.target" "postgresql.service" ];
+  #   wants = [ "network-online.target" "postgresql.service" ];
+  #
+  #   # The command to start your app
+  #   # (Assumes you've built your Next.js app with Nix)
+  #   script = ''
+  #     # Set database credentials and other secrets here
+  #     export DATABASE_URL="postgres://hms_user:password@localhost/hms_db"
+  #     # Run the production server from the Nix build output of your app
+  #     exec ${hms-app-pkg}/bin/start-server
+  #   '';
+  #
+  #   # Run the service as a dedicated, unprivileged user for security
+  #   serviceConfig = {
+  #     User = "hms";
+  #     Group = "hms";
+  #     Restart = "always"; # Automatically restart if it crashes
+  #   };
+  # };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
