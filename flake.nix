@@ -7,7 +7,7 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, sops-nix, ... }: {
     nixosConfigurations.ascii = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
