@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, hms-app-pkg, ... }:
 
 {
   imports =
@@ -133,7 +133,7 @@
       # Set database credentials and other secrets here
       export DATABASE_URL="postgres://hms_user:password@localhost/hms_db"
       # Run the production server from the Nix build output of your app
-      exec ${pkgs.my-hms-app}/bin/start-server
+      exec ${hms-app-pkg}/bin/start-server
     '';
 
     # Run the service as a dedicated, unprivileged user for security
@@ -144,6 +144,8 @@
       };
     };
   };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
